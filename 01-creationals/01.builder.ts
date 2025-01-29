@@ -13,6 +13,8 @@
  * https://refactoring.guru/es/design-patterns/builder
  */
 
+import { COLORS } from "../helpers/colors.ts";
+
 /**
  * ! Builder Pattern:
  * It is a creational design pattern that allows us to construct complex objects
@@ -35,7 +37,11 @@ class Computer{
   public gpu: string ='gpu - not defined';
 
   displayConfiguration(){
-    console.log(`Configuration: ${this.cpu}, ${this.ram}, ${this.storage}, ${this.gpu}`);
+    console.log(`Configuration: 
+      CPU: ${this.cpu}
+      RAM: ${this.ram}
+      STORAGE: ${this.storage}
+      GPU: ${this.gpu}`);
   }
 }
 
@@ -70,3 +76,26 @@ class ComputerBuilder{
     return this.computer;
   }
 }
+
+function main(){
+  const basicComputer:Computer=new ComputerBuilder()
+    .setCPU('Rayzen 9 7900x')
+    .setRAM('64GB')
+    .setStorage('4Tb')
+    .build()
+
+    console.log('%c Basic Computer:',COLORS.blue);
+    basicComputer.displayConfiguration()
+
+    const gamerComputer:Computer=new ComputerBuilder()
+        .setRAM('128GB')
+        .setRAM('64GB')
+        .setCPU('Ryzen 9 9950x')
+        .setStorage('4Tb')
+        .setGPU('Nvidiagtx 5090')
+    .build()
+    console.log('%c Gamer computer',COLORS.red);
+    gamerComputer.displayConfiguration()
+    
+}
+main()
